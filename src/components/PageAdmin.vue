@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import { ref } from 'vue'
   import axios from 'axios'
-  import ArticleItem from './ArticleItem.vue'
+  import AdminArticleItem from './AdminAriticleItem.vue'
 
 
 
@@ -25,12 +25,16 @@
 </script>
 
 <template>
-  <ArticleItem 
+  <title>FUE</title>
+  <h1>后台</h1>
+  <AdminArticleItem 
     v-for="item in article"
-    :apiHref="'#/article/' + item._id">
+    :articleViewHref="'#/article/' + item._id"
+    :articleEditorHref="'#/editor/' + item._id">
+    <template #date>{{ item.ct }}</template>
     <template #title>{{ item.title }}</template>
     <template #summary>{{ item.summary }}</template>
-  </ArticleItem>
+  </AdminArticleItem>
   <a href="#/newArticle">Editor</a>
 </template>
   

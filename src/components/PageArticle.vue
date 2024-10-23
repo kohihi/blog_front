@@ -1,14 +1,22 @@
 <script setup lang="ts">
-import CradItem from "./ACGNMItem.vue"
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 import axios from 'axios'
+import { marked } from 'marked'
 
-let article = ref({})
+const article_id: string = window.location.hash.split('/').slice(-1)[0]
+const article = ref({
+  title: "",
+  content: "",
+})
+const content_html = ref<string | Promise<string>>("Article Content")
 
-axios.get('http://127.0.0.1:9911/article/')
+
+
+axios.get('http://127.0.0.1:9911/article/' + article_id)
   .then(function (response) {
     // 处理成功情况
     article.value = response.data.data;
+    content_html.value = marked.parse(article.value.content)
   })
   .catch(function (error) {
     // 处理错误情况
@@ -21,9 +29,9 @@ axios.get('http://127.0.0.1:9911/article/')
 </script>
 
 <template>
-  <p>
-    {{ article.content }}
-  </p>
+  <h1>{{ article.title }}</h1>
+  <hr>
+  <span v-html="content_html"></span>
 </template>
   
 <style scoped>
