@@ -5,13 +5,15 @@ import ACGNM from './components/PageACGNM.vue'
 import Article from './components/PageArticle.vue'
 import Editor from './components/PageEditor.vue'
 import Admin from './components/PageAdmin.vue'
+import Record from './components/PageRecord.vue'
 
 const routes: Record<string, any> = {
     '/': Home,
     '/acgnm': ACGNM,
     '/article': Article,
-    '/editor': Editor,
     '/admin': Admin,
+    '/editor': Editor,
+    '/record': Record,
   }
 
   const currentPath = ref<string>(window.location.hash)
@@ -31,14 +33,39 @@ const routes: Record<string, any> = {
 </script>
 
 <template>
-    <a href="#/">Home</a> |
-    <a href="#/acgnm">A·C·G·N·M</a> |
-    <a href="#/editor">Editor</a> |
-    <a href="#/admin">后台</a>
-    <div>
-      <component :is="currentView" />
-    </div>
+  <div class="bgWrap"></div>
+  <!-- <div class="header"></div> -->
+  <div style="display: block;">
+    <a href="#/">Blog</a> |
+    <a href="#/acgnm">A·C·G·N·M</a>
+  </div>
+  <component :is="currentView" />
 </template>
   
 <style scoped>
+.header{
+  width: 100vw;
+  height: 48px;
+  background: url(/src/assets/site_header.png) no-repeat center;
+  background-color: #fff;
+  box-shadow: 0px 2px 2px #ffffff;
+  margin-bottom: 10px;
+  font-size: 32px;
+  filter: brightness(0.7);
+  position: fixed;
+  left: 0px;
+  top: 0px;
+}
+
+.bgWrap {
+  width: 100%;
+  height: 100%;
+  background-image: url(/src/assets/texture.png);
+  background-color: #fffef9;
+  position: fixed;
+  z-index: -1;
+  position: fixed;
+  left: 0px;
+  top: 0px;
+}
 </style>

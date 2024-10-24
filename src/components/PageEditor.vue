@@ -42,6 +42,7 @@ function submitArticle() {
   article.value.content = input.value
   axios.post(globle_.apiArticle, article.value)
     .then(function (response) {
+      alert("提交完成")
       // 处理成功情况
     })
     .catch(function (error) {
